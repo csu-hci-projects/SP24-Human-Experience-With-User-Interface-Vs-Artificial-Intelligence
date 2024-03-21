@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "mealplanner-464",
+    "private_key_id": "fef54b807edcdf54a558ce7be7e8ef45e274ab63",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC9tmHsdJ+NUPs8\n+D1OpKGT5IskiYKCYKZx5cWTo0biFuk97t76vzdcki6UdDTyA+tMXp/Fmpo6s2iZ\nxvPpRZrr4f2/7ayQcwfzMEwR+vW28lzSDHSIGo3FaiOmZl3rO3u5DWEgYp4K54/w\ncesYLKttZg0GzIa/DC7tGAx/7s7IuxB+preyRjVYlD6mVGthixA/LYKPNtTRCZhd\nEyQLLGGDjvmAfziQdyzVhSTv8gdMSD0yFUXmOqzicZPcomQsk7gcoBNbx3DWop0Z\njLk4KGn3KrQ8wIG20KyaHFRw/c0b3d5TqDvBwnUYcycHFpusKTirI+7zT3/6lh20\nbftTrn/PAgMBAAECggEAEK1UQruRJ79F3rsPH0yJ/FzGaJICsYsP3ApatIWmyQrs\n5RS3GwGCkIuJ4bisy4D8XHcjAiAlomG8IRc5a45tYIK6J6Gb87TRBEKrepco+4n8\nY+X+u9TjFUbP1yRqPtq4n8YP0uTTHNqfWiqW2UYFVIrN5q+bFsyvjAh7Aidlm9qY\nVHRD5N3NYO+ZWLNSExFQyMne9Lg202YWrnv2PA6VLmH01kCEDF9rrj1bpWx4uxFT\nNAvdlESCPYKBPfGoG8kh+dLAM9WnWCTOZIeJRXU84JZpa8RVx2Xx5A6LnQk1JyuZ\nJolWNvhWipkd+ZX76LEdsECPplGSqiLA+FUphs6pEQKBgQD0SImwkcXUuy7Ygf9o\nkXQae9+TA+rjuxeXuCP/X5PcVdpbyCK91XQ5Lj3jMasfZuQoLLvUvABLZt4FM0ot\nArGuvJoexoen786RFUdsVWjzNbr7JSh2ebca8T9/cywCh/zEB4V4HhbOChgyO1YN\nx0PTfVoNdFMh3RBITMmZgjTcsQKBgQDGz8oFksIs51KmRWvxOKxjX4SLHbJL+TEm\nLJbVOAjjCuRDawckgiwtlxKPutISH2+bxQpz1SM+kCOc+rmnFZCzYxYuO/SCtcea\neB34EO5E5j7pCZfAxtb96WSkMLpundQ/IsRXsSeCKaV8bROtrCahvERkyxYgSfgh\ntiOMO7ZEfwKBgF0uek8/G86M5E60L+AMc9RSYjMrMGNUD6jRFfIo3DcVDKksC4yM\nKrxRFkxeut7MmcV1YuTAHgClKZWkPewzdeGokcWhh0eZIxuWmVsKrXDwkvWP9AJV\nZXJCii0smqIQi2ufTttF5v8LPLWUirvQwd+flkVBlSB6ueZKXDBRSabRAoGAZTJ5\ng7K7Mf4hXM8zbZrKbN6+6c0Y54EVWngR4sBeDauKmyKMhTHZaO9gHFcc/OqRdfmr\nI2DXSs41wn8BJyJcAGOsc6ZDBJGg42jG4HFFxz5nwVkHrLHJ138IombHTuz5j5WT\n2YssMB4gxSAEhz98fpEFQ0T4o0Djk81RdN0kHuMCgYA+zC94cYcCy5MHUSa2B9CG\nJvpYgTjkA0gXxX9eSC83PT71YLwX8xjsFhskC3x8OG+SqAuJBE4DvlSxDXUPROlc\nF7Av+Zdkk5zuxASOOlynm7Wjos8NA/LF9/XbJ2aAuJBoOGKOBC2+2Pg7aRtlb0xh\nDDX0a+e4vPxg/qZa59EO+g==\n-----END PRIVATE KEY-----\n",
+    "client_email": "mealplanner-chatbot@mealplanner-464.iam.gserviceaccount.com",
+    "client_id": "111696895461846231614",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mealplanner-chatbot%40mealplanner-464.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
