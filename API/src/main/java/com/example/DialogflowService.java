@@ -19,7 +19,7 @@ public class DialogflowService {
     public void init() throws IOException {
         String projectId = "mealplanner-464";
 
-        FileInputStream keyFileInputStream = new FileInputStream("/path/to/your/keyfile.json");
+        FileInputStream keyFileInputStream = new FileInputStream("API/src/main/resources/keyfile.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(keyFileInputStream);
         SessionsSettings sessionsSettings = SessionsSettings.newBuilder().setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
         sessionsClient = SessionsClient.create(sessionsSettings);
