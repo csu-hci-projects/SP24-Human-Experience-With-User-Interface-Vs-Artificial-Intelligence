@@ -5,3 +5,7 @@
 2. Run "mvn spring-boot:run"
 
 You can run Postman calls to the chatbot using 'http://localhost:3000/chatbot'
+
+## Checkpoint 1
+Prototype: https://youtu.be/hoLav-ss2No
+Jeremiah set up the initial outline on overleaf and handled the programming of the UI while I (Ashaka) took care of the research process, searching for other references and writing up the paper. The meetings were regularly online, usually during weekends where we would update each other on our progress and work through kinks. For example, I attempted to use DialogFlow to train the chatbot, but there was trouble with making it work with the rest of the program. Then, we tried to use ChatterBot, but that didn’t work with the current version of Python we had. Jeremiah ended up coming up with the idea to manually create the chatbot through NPL and I redirected the focus of our paper from AI to NPL. Since that change happened pretty recently, we haven’t had the time to do more thorough research into NPL, so that’s something we will be focusing on before checkpoint 2.
