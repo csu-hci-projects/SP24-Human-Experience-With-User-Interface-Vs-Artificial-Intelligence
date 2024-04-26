@@ -26,7 +26,7 @@ function ChatComponent() {
                     const botResponseText = typeof newBotResponse === 'object' ? newBotResponse.input : newBotResponse;
                     const updatedMessages = [...newMessages, { text: botResponseText, sender: 'bot' }];
                     setMessages(updatedMessages);
-                    setShowImages(botResponseText.includes("Final question! Using 1, 2, or 3; which body type best resembles yours?"));
+                    setShowImages(botResponseText.includes("Final question! Which body type best resembles yours? (Just click the image that best fits)."));
                 }, 1000);
             })
             .catch(error => {
@@ -34,8 +34,6 @@ function ChatComponent() {
             });
     };
     
-    
-
     const handleInputChange = (event) => {
         setUserInput(event.target.value);
     };
@@ -66,6 +64,11 @@ function ChatComponent() {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
+    const handleImageClick = (number) => {
+        setUserInput(number);
+        sendMessage(number); // Send the selected number as a message
+    };
+
     return (
         <div className="chat-container">
             <div className="message-container">
@@ -78,16 +81,16 @@ function ChatComponent() {
                     <div>
                         <div className="bodyNumbers">
                             <div>
-                                <p>1</p>
-                                <img src={lean} alt="lean" className="bodyImage" />
+                                <p onClick={() => handleImageClick('1')}>Skinny</p>
+                                <img src={lean} alt="lean" className="bodyImage" onClick={() => handleImageClick('1')} />
                             </div>
                             <div>
-                                <p>2</p>
-                                <img src={jacked} alt="jacked" className="bodyImage" />
+                                <p onClick={() => handleImageClick('2')}>Lean</p>
+                                <img src={jacked} alt="jacked" className="bodyImage" onClick={() => handleImageClick('2')} />
                             </div>
                             <div>
-                                <p>3</p>
-                                <img src={swole} alt="swole" className="bodyImage" />
+                                <p onClick={() => handleImageClick('3')}>Buff</p>
+                                <img src={swole} alt="swole" className="bodyImage" onClick={() => handleImageClick('3')} />
                             </div>
                         </div>
                     </div>

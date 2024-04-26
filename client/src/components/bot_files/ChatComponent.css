@@ -78,6 +78,14 @@ button img {
     margin-top: -20px;
 }
 
+.bodyNumbers p {
+    margin-bottom: 10px;
+    color: #53266e;
+    font-weight: bold;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: white;
+}
+
 .bodyNumbers div {
     text-align: center; /* Centers the content horizontally */
 }
@@ -87,4 +95,5 @@ button img {
     height: 200px;
     margin-bottom: 10px;
     margin-top: -10px;
+    cursor: pointer;
 }

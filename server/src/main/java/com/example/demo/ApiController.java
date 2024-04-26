@@ -89,7 +89,7 @@ public class ApiController {
             }
             System.out.println("I GOT: " + data.activity);
             callNum++;
-            return ResponseEntity.ok("Final question! Using 1, 2, or 3; which body type best resembles yours?");
+            return ResponseEntity.ok("Final question! Which body type best resembles yours? (Just click the image that best fits).");
         } else if (callNum == 7) {
             data.body = extractNum(input);
             System.out.println("RECIEVED: " + data.body);
