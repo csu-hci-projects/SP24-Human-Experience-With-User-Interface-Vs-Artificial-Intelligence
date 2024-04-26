@@ -89,7 +89,15 @@ public class ApiController {
             }
             System.out.println("I GOT: " + data.activity);
             callNum++;
-            return ResponseEntity.ok("Final question! Body type");
+            return ResponseEntity.ok("Final question! Using 1, 2, or 3; which body type best resembles yours?");
+        } else if (callNum == 7) {
+            data.body = extractNum(input);
+            System.out.println("RECIEVED: " + data.body);
+            if (data.body < 0 || data.body > 4) {
+                return ResponseEntity.ok("Sorry, that's not a valid input. Please try again.");
+            }
+            callNum++;
+            return ResponseEntity.ok("Alright, all done! Generating your meal plan now...");
         } else {
             String response = ChatBot.getChatbotResponse(input);
             System.out.println("Input: " + input);

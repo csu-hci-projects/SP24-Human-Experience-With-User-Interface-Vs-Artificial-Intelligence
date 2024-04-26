@@ -3,11 +3,16 @@ import axios from 'axios';
 import './ChatComponent.css'; // Import CSS file for styling
 import { IoIosSend } from "react-icons/io";
 
+import lean from '../Items/img/lean.jpg';
+import swole from '../Items/img/swole.jpg';
+import jacked from '../Items/img/jacked.jpg';
+
 function ChatComponent() {
     const [userInput, setUserInput] = useState('');
     const [messages, setMessages] = useState([
         { text: 'Welcome to SmartEatz! You can ask me questions and I will do my best to answer them! You can also type "input mode" for me to generate you a meal plan!', sender: 'bot' }
     ]);
+    const [showImages, setShowImages] = useState(false);
 
     const messagesEndRef = useRef(null);
 
@@ -21,6 +26,7 @@ function ChatComponent() {
                     const botResponseText = typeof newBotResponse === 'object' ? newBotResponse.input : newBotResponse;
                     const updatedMessages = [...newMessages, { text: botResponseText, sender: 'bot' }];
                     setMessages(updatedMessages);
+                    setShowImages(botResponseText.includes("Final question! Using 1, 2, or 3; which body type best resembles yours?"));
                 }, 1000);
             })
             .catch(error => {
@@ -68,6 +74,24 @@ function ChatComponent() {
                         {message.text}
                     </div>
                 ))}
+                {showImages && (
+                    <div>
+                        <div className="bodyNumbers">
+                            <div>
+                                <p>1</p>
+                                <img src={lean} alt="lean" className="bodyImage" />
+                            </div>
+                            <div>
+                                <p>2</p>
+                                <img src={jacked} alt="jacked" className="bodyImage" />
+                            </div>
+                            <div>
+                                <p>3</p>
+                                <img src={swole} alt="swole" className="bodyImage" />
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div ref={messagesEndRef} />
             </div>
             <div className="input-container">
@@ -80,9 +104,8 @@ function ChatComponent() {
                     onKeyDown={handleKeyDown}
                 />
                 <button className="chat-button" onClick={handleSubmit}>
-                <IoIosSend />
+                    <IoIosSend />
                 </button>
-
             </div>
         </div>
     );
