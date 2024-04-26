@@ -3,12 +3,15 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,6 +32,31 @@ public class ApiController {
         return ResponseEntity.ok(data);
     }
     */
+
+    @GetMapping("/data")
+    public Map<String, Object> getData() {
+        Map<String, Object> dataMap = new HashMap<>();
+
+        dataMap.put("age", data.age);
+        dataMap.put("height", "data.height");
+        dataMap.put("weight", data.weight);
+        dataMap.put("desiredWeight", data.desiredWeight);
+        dataMap.put("sex", data.sex);
+        dataMap.put("activity", data.activity);
+        dataMap.put("body", data.body);
+
+        return dataMap;
+    }
+
+    @PostMapping("/api")
+    public ResponseEntity<String> handlePostRequest() {
+      
+        Caller caller = new Caller();
+        Calculations calculation = new Calculations(data.age, data.height, data.weight, data.desiredWeight, data.sex, data.activity, data.body);
+        String data = caller.useData(calculation);
+
+        return ResponseEntity.ok(data);
+    }
 
     @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping("/chatbot")

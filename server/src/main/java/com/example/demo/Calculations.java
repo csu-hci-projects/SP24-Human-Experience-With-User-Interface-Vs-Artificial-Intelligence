@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.lang.Character;
-
 public class Calculations {
 
     public int userCals;
@@ -12,26 +10,12 @@ public class Calculations {
     public double carbs;
     public double fat;
     
-    public Calculations(int age, String height, int weight, int desiredWeight, String sex, String activity, int body) {
+    public Calculations(int age, int height, int weight, int desiredWeight, String sex, String activity, int body) {
 
         double activityFactor = 0;
         double bodyFat = 0;
         double RMR = 0;
         double TDEE = 0;
-        int realHeight = 0;
-
-        boolean first = true;
-        for (int i = 0; i < height.length(); i++) {
-            char curr = height.charAt(i);
-            if (Character.isDigit(curr)) {
-                if (first) {
-                    realHeight += Character.getNumericValue(curr) * 12;
-                    first = false;
-                } else {
-                    realHeight += Character.getNumericValue(curr);
-                }
-            }
-        }
 
         if (activity.contains("1-2")) {
             activityFactor = 1.375;
@@ -53,9 +37,9 @@ public class Calculations {
         double lbMass = (weight / 2.2) - fatMass;
  
         if (sex.contains("Male")) {
-            RMR = (9.99* (weight / 2.2)) + (6.25 * (realHeight * 2.54)) - (4.92 * age) + 5; //Mifflin-St.Jeor Men
+            RMR = (9.99* (weight / 2.2)) + (6.25 * (height * 2.54)) - (4.92 * age) + 5; //Mifflin-St.Jeor Men
         } else {
-            RMR = (9.99* (weight / 2.2)) + (6.25 * (realHeight * 2.54)) - (4.92 * age) - 161; //Mifflin-St.Jeor Women
+            RMR = (9.99* (weight / 2.2)) + (6.25 * (height * 2.54)) - (4.92 * age) - 161; //Mifflin-St.Jeor Women
         }
         
         TDEE = RMR * activityFactor;
