@@ -1,22 +1,18 @@
 package com.example.demo;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import java.io.*;
+import java.util.*;
+import org.apache.commons.text.similarity.*;
+import org.json.simple.*;
+import org.json.simple.parser.*;
 
 public class ChatBot {
-
     public static boolean learn = false;
     public static String lastAnswer;
 
     private static final String KNOWLEDGE_BASE_FILE_PATH = "src/main/java/com/example/demo/Knowledge_Base.json";
+    private static final double SIMILARITY_THRESHOLD = 0.6;
+    private static final int MAX_RESULTS = 5;
 
     @SuppressWarnings("unchecked")
     public static Map<String, Object> loadKnowledgeBase() throws IOException, ParseException {
@@ -29,25 +25,19 @@ public class ChatBot {
 
     public static void saveKnowledgeBase(String newQuestion, String newAnswer) throws IOException {
         try {
-            // Read existing JSON file
-            System.out.println("Before: " + newQuestion);
             JSONParser parser = new JSONParser();
             FileReader reader = new FileReader(KNOWLEDGE_BASE_FILE_PATH);
             Object obj = parser.parse(reader);
             JSONObject jsonObject = (JSONObject) obj;
 
-            // Get the "questions" array from the JSON object
             JSONArray questions = (JSONArray) jsonObject.get("questions");
 
-            // Create a new JSON object for the new question
             JSONObject newQuestionObj = new JSONObject();
             newQuestionObj.put("question", newQuestion);
             newQuestionObj.put("answer", newAnswer);
 
-            // Add the new question object to the "questions" array
             questions.add(newQuestionObj);
 
-            // Write the updated JSON object back to the file
             FileWriter writer = new FileWriter(KNOWLEDGE_BASE_FILE_PATH);
             writer.write(jsonObject.toJSONString());
             writer.flush();
@@ -59,14 +49,8 @@ public class ChatBot {
             e.printStackTrace();
         }
     }
-    
-
-    public static String findBestMatch(String userQuestion, List<String> questions) {
-        return getClosestMatch(userQuestion, questions);
-    }
 
     public static String getChatbotResponse(String userInput) throws IOException, ParseException {
-
         Map<String, Object> knowledgeBase = loadKnowledgeBase();
 
         if (learn) {
@@ -77,81 +61,61 @@ public class ChatBot {
 
         lastAnswer = userInput;
 
-            String bestMatch = findBestMatch(userInput, getQuestionsList(knowledgeBase));
-            if (bestMatch != null) {
-                learn = false;
-                return getAnswerForQuestion(bestMatch, knowledgeBase);
-            } else {
-                // Ask the user what they mean to learn from the question
-                /*
-                JSONObject newQuestion = new JSONObject();
-                newQuestion.put("question", userInput);
-                newQuestion.put("answer", newAnswer);
-                JSONArray questionsArray = (JSONArray) knowledgeBase.get("questions");
-                questionsArray.add(newQuestion);
-                saveKnowledgeBase("Knowledge_Base.json", knowledgeBase);
-                */
-                learn = true;
-                return "I don't know the answer. What do you mean to learn from it?";
+        String normalizedInput = userInput.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
+
+        List<String> questionsList = getQuestionsList(knowledgeBase);
+
+        Map<String, String> preprocessedQuestions = preprocessQuestions(questionsList);
+
+        Map<String, Double> similarityScores = new HashMap<>();
+        for (Map.Entry<String, String> entry : preprocessedQuestions.entrySet()) {
+            double similarity = calculateSimilarity(normalizedInput, entry.getValue());
+            if (similarity >= SIMILARITY_THRESHOLD) {
+                similarityScores.put(entry.getKey(), similarity);
             }
+        }
+
+        List<Map.Entry<String, Double>> sortedSimilarities = new ArrayList<>(similarityScores.entrySet());
+        sortedSimilarities.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        List<String> bestMatches = new ArrayList<>();
+        for (int i = 0; i < Math.min(MAX_RESULTS, sortedSimilarities.size()); i++) {
+            bestMatches.add(sortedSimilarities.get(i).getKey());
+        }
+
+        if (!bestMatches.isEmpty()) {
+            return getAnswerForQuestion(bestMatches.get(0), knowledgeBase);
+        } else {
+            learn = true;
+            return "I don't know the answer. What do you mean to learn from it?";
+        }
     }
 
-    public static String getClosestMatch(String userQuestion, List<String> questions) {
-        double similarityThreshold = 0.7;
-        List<String> matches = new ArrayList<>();
+    private static Map<String, String> preprocessQuestions(List<String> questions) {
+        Map<String, String> preprocessedQuestions = new HashMap<>();
         for (String question : questions) {
-            double similarity = similarity(userQuestion, question);
-            if (similarity >= similarityThreshold) {
-                matches.add(question);
-            }
+            preprocessedQuestions.put(question, question.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", ""));
         }
-        if (!matches.isEmpty()) {
-            return matches.get(0);
-        }
-        return null;
+        return preprocessedQuestions;
     }
 
-    public static double similarity(String s1, String s2) {
-        String longer = s1.toLowerCase();
-        String shorter = s2.toLowerCase();
-        int longerLength = longer.length();
-        int shorterLength = shorter.length();
-        if (longerLength < shorterLength) {
-            String temp = longer;
-            longer = shorter;
-            shorter = temp;
-        }
-        if (longerLength == 0) {
-            return 1.0;
-        }
-        return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
+    private static double calculateSimilarity(String s1, String s2) {
+        Map<CharSequence, Integer> freq1 = getWordFrequencies(s1);
+        Map<CharSequence, Integer> freq2 = getWordFrequencies(s2);
+    
+        CosineSimilarity cosineSimilarity = new CosineSimilarity();
+        return cosineSimilarity.cosineSimilarity(freq1, freq2);
     }
-
-    public static int editDistance(String s1, String s2) {
-        s1 = s1.toLowerCase();
-        s2 = s2.toLowerCase();
-
-        int[] costs = new int[s2.length() + 1];
-        for (int i = 0; i <= s1.length(); i++) {
-            int lastValue = i;
-            for (int j = 0; j <= s2.length(); j++) {
-                if (i == 0) {
-                    costs[j] = j;
-                } else if (j > 0) {
-                    int newValue = costs[j - 1];
-                    if (s1.charAt(i - 1) != s2.charAt(j - 1)) {
-                        newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-                    }
-                    costs[j - 1] = lastValue;
-                    lastValue = newValue;
-                }
-            }
-            if (i > 0) {
-                costs[s2.length()] = lastValue;
-            }
+    
+    private static Map<CharSequence, Integer> getWordFrequencies(String s) {
+        Map<CharSequence, Integer> frequencies = new HashMap<>();
+        String[] words = s.split(" ");
+        for (String word : words) {
+            frequencies.put(word, frequencies.getOrDefault(word, 0) + 1);
         }
-        return costs[s2.length()];
+        return frequencies;
     }
+    
 
     public static String getAnswerForQuestion(String question, Map<String, Object> knowledgeBase) {
         JSONArray questionsArray = (JSONArray) knowledgeBase.get("questions");
