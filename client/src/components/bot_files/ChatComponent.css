@@ -87,7 +87,7 @@ button img {
 }
 
 .bodyNumbers div {
-    text-align: center; /* Centers the content horizontally */
+    text-align: center;
 }
 
 .bodyImage {
@@ -97,3 +97,43 @@ button img {
     margin-top: -10px;
     cursor: pointer;
 }
+
+.meal-plan-container {
+    margin: 20px auto;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.meal-plan-header {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -15px;
+    font-size: 1.2rem;
+    color: white;
+    border-bottom: 2px solid white;
+    padding-bottom: 8px;
+}
+
+.meal-plan-list {
+    list-style: none;
+    padding: 0;
+}
+
+.meal-plan-list h4 {
+    margin-bottom: 10px;
+}
+
+.meal-plan-list li {
+    margin-bottom: 5px;
+}
+
+.meal-plan-total {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.meal-plan-total p {
+    margin-bottom: -5px;
+}
+

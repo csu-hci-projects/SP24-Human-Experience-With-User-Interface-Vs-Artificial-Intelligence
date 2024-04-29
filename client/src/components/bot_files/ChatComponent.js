@@ -17,6 +17,10 @@ function ChatComponent() {
     const messagesEndRef = useRef(null);
 
     const [mealData, setMealData] = useState(null);
+    const [totalCalories, setTotalCalories] = useState(0);
+    const [totalProtein, setTotalProtein] = useState(0);
+    const [totalCarbs, setTotalCarbs] = useState(0);
+    const [totalFat, setTotalFat] = useState(0);
 
     const sendApiRequest = (input) => {
         axios.post('http://localhost:3000/chatbot', { input })
@@ -34,6 +38,7 @@ function ChatComponent() {
                             .then(response => {
                                 const mealData = response.data;
                                 setMealData(mealData);
+                                findTotals()
                             })
                             .catch(error => {
                                 console.error("API Request Error:", error);
@@ -81,13 +86,42 @@ function ChatComponent() {
         sendMessage(number); // Send the selected number as a message
     };
 
-    // Function to display meal plan in a cool way
-    const displayMealPlan = () => {
+    function findTotals() {
+        console.log("here")
+        let cals = 0;
+        let prot = 0;
+        let carb = 0;
+        let fat = 0;
+        for (let i  = 0; i < mealData.breakfast.Calories.length; i++) {
+          cals += mealData.breakfast.Calories[i];
+          prot += mealData.breakfast.Protein[i];
+          carb += mealData.breakfast.Carbs[i];
+          fat += mealData.breakfast.Fat[i];
+        }
+        for (let i  = 0; i < mealData.lunch.Calories.length; i++) {
+          cals += mealData.lunch.Calories[i];
+          prot += mealData.lunch.Protein[i];
+          carb += mealData.lunch.Carbs[i];
+          fat += mealData.lunch.Fat[i];
+        }
+        for (let i  = 0; i < mealData.dinner.Calories.length; i++) {
+          cals += mealData.dinner.Calories[i];
+          prot += mealData.dinner.Protein[i];
+          carb += mealData.dinner.Carbs[i];
+          fat += mealData.dinner.Fat[i];
+        }
+        setTotalCalories(cals);
+        setTotalProtein(Math.round(prot));
+        setTotalCarbs(Math.round(carb));
+        setTotalFat(Math.round(fat));
+      }
+
+      const displayMealPlan = () => {
         if (mealData) {
             return (
-                <div>
-                    <h3>Here's your meal plan:</h3>
-                    <ul>
+                <div className="meal-plan-container">
+                    <h3 className="meal-plan-header">Here's your meal plan:</h3>
+                    <ul className="meal-plan-list">
                         <li>
                             <h4>Breakfast</h4>
                             <ul>
@@ -113,11 +147,18 @@ function ChatComponent() {
                             </ul>
                         </li>
                     </ul>
+                    <div className="meal-plan-total">
+                        <p>Total Calories: {totalCalories}</p>
+                        <p>Total Protein: {totalProtein}g</p>
+                        <p>Total Carbs: {totalCarbs}g</p>
+                        <p>Total Fat: {totalFat}g</p>
+                    </div>
                 </div>
             );
         }
         return null;
     };
+    
 
     return (
         <div className="chat-container">
