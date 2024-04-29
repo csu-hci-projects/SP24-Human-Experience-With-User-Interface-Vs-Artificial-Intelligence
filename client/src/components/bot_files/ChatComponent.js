@@ -37,8 +37,8 @@ function ChatComponent() {
                         axios.post('http://localhost:3000/api')
                             .then(response => {
                                 const mealData = response.data;
+                                findTotals(mealData);
                                 setMealData(mealData);
-                                findTotals()
                             })
                             .catch(error => {
                                 console.error("API Request Error:", error);
@@ -86,29 +86,29 @@ function ChatComponent() {
         sendMessage(number); // Send the selected number as a message
     };
 
-    function findTotals() {
+    function findTotals(mealDataTemp) {
         console.log("here")
         let cals = 0;
         let prot = 0;
         let carb = 0;
         let fat = 0;
-        for (let i  = 0; i < mealData.breakfast.Calories.length; i++) {
-          cals += mealData.breakfast.Calories[i];
-          prot += mealData.breakfast.Protein[i];
-          carb += mealData.breakfast.Carbs[i];
-          fat += mealData.breakfast.Fat[i];
+        for (let i  = 0; i < mealDataTemp.breakfast.Calories.length; i++) {
+          cals += mealDataTemp.breakfast.Calories[i];
+          prot += mealDataTemp.breakfast.Protein[i];
+          carb += mealDataTemp.breakfast.Carbs[i];
+          fat += mealDataTemp.breakfast.Fat[i];
         }
-        for (let i  = 0; i < mealData.lunch.Calories.length; i++) {
-          cals += mealData.lunch.Calories[i];
-          prot += mealData.lunch.Protein[i];
-          carb += mealData.lunch.Carbs[i];
-          fat += mealData.lunch.Fat[i];
+        for (let i  = 0; i < mealDataTemp.lunch.Calories.length; i++) {
+          cals += mealDataTemp.lunch.Calories[i];
+          prot += mealDataTemp.lunch.Protein[i];
+          carb += mealDataTemp.lunch.Carbs[i];
+          fat += mealDataTemp.lunch.Fat[i];
         }
-        for (let i  = 0; i < mealData.dinner.Calories.length; i++) {
-          cals += mealData.dinner.Calories[i];
-          prot += mealData.dinner.Protein[i];
-          carb += mealData.dinner.Carbs[i];
-          fat += mealData.dinner.Fat[i];
+        for (let i  = 0; i < mealDataTemp.dinner.Calories.length; i++) {
+          cals += mealDataTemp.dinner.Calories[i];
+          prot += mealDataTemp.dinner.Protein[i];
+          carb += mealDataTemp.dinner.Carbs[i];
+          fat += mealDataTemp.dinner.Fat[i];
         }
         setTotalCalories(cals);
         setTotalProtein(Math.round(prot));
