@@ -137,3 +137,14 @@ button img {
     margin-bottom: -5px;
 }
 
+.foodItem {
+    cursor: pointer;
+    background-color: #b37709;
+    color: white;
+    border: 0px;
+    font-size: 14px;
+}
+
+.foodItem:hover {
+    background-color: #53266e;
+}

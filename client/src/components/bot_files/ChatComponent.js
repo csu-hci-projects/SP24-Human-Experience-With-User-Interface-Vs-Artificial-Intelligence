@@ -126,7 +126,15 @@ function ChatComponent() {
                             <h4>Breakfast</h4>
                             <ul>
                                 {mealData.breakfast.Names.map((foodItem, index) => (
-                                    <li key={index}>{foodItem}</li>
+                                    <FoodItem
+                                    key={index}
+                                    name={foodItem}
+                                    calories={mealData.breakfast.Calories[index]}
+                                    protein={mealData.breakfast.Protein[index]}
+                                    carbs={mealData.breakfast.Carbs[index]}
+                                    fat={mealData.breakfast.Fat[index]}
+                                    serving={mealData.breakfast.Serving[index]}
+                                  />
                                 ))}
                             </ul>
                         </li>
@@ -134,7 +142,15 @@ function ChatComponent() {
                             <h4>Lunch</h4>
                             <ul>
                                 {mealData.lunch.Names.map((foodItem, index) => (
-                                    <li key={index}>{foodItem}</li>
+                                    <FoodItem
+                                    key={index}
+                                    name={foodItem}
+                                    calories={mealData.breakfast.Calories[index]}
+                                    protein={mealData.breakfast.Protein[index]}
+                                    carbs={mealData.breakfast.Carbs[index]}
+                                    fat={mealData.breakfast.Fat[index]}
+                                    serving={mealData.breakfast.Serving[index]}
+                                  />
                                 ))}
                             </ul>
                         </li>
@@ -142,7 +158,15 @@ function ChatComponent() {
                             <h4>Dinner</h4>
                             <ul>
                                 {mealData.dinner.Names.map((foodItem, index) => (
-                                    <li key={index}>{foodItem}</li>
+                                    <FoodItem
+                                    key={index}
+                                    name={foodItem}
+                                    calories={mealData.breakfast.Calories[index]}
+                                    protein={mealData.breakfast.Protein[index]}
+                                    carbs={mealData.breakfast.Carbs[index]}
+                                    fat={mealData.breakfast.Fat[index]}
+                                    serving={mealData.breakfast.Serving[index]}
+                                  />
                                 ))}
                             </ul>
                         </li>
@@ -210,3 +234,22 @@ function ChatComponent() {
 }
 
 export default ChatComponent;
+
+const FoodItem = ({ name, calories, protein, carbs, fat, serving }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+  
+    return (
+      <li onClick={() => setIsExpanded(!isExpanded)}>
+        <button className="foodItem">{name}</button>
+        {isExpanded && (
+          <div>
+            <p>Calories: {calories}</p>
+            <p>Protein: {protein}g</p>
+            <p>Carbs: {carbs}g</p>
+            <p>Fat: {fat}g</p>
+            <p>Serving Size: {serving}</p>
+          </div>
+        )}
+      </li>
+    );
+  };
