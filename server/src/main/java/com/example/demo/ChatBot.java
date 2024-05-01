@@ -86,8 +86,9 @@ public class ChatBot {
         if (!bestMatches.isEmpty()) {
             return getAnswerForQuestion(bestMatches.get(0), knowledgeBase);
         } else {
-            learn = true;
-            return "I don't know the answer. What do you mean to learn from it?";
+            //learn = true;
+            //return "I don't know the answer. What do you mean to learn from it?";
+            return "I'm not too sure what you said. Please try rephrasing it!";
         }
     }
 
