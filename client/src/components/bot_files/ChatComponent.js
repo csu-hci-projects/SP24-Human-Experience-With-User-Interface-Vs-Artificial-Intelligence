@@ -14,7 +14,7 @@ function ChatComponent() {
     ]);
     const [showImages, setShowImages] = useState(false);
 
-    const messagesEndRef = useRef(null);
+    const messagesEndRef = useRef(null); // chat window scrolling
 
     const [mealData, setMealData] = useState(null);
     const [totalCalories, setTotalCalories] = useState(0);
