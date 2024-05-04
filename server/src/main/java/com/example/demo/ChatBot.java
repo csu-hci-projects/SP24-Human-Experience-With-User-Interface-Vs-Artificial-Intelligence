@@ -7,7 +7,7 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 
 public class ChatBot {
-    public static boolean learn = false;
+    public static boolean learn = false; //testing/beta feature in order to teach the chatbot while running the program
     public static String lastAnswer;
 
     private static final String KNOWLEDGE_BASE_FILE_PATH = "src/main/java/com/example/demo/Knowledge_Base.json";
@@ -53,7 +53,7 @@ public class ChatBot {
     public static String getChatbotResponse(String userInput) throws IOException, ParseException {
         Map<String, Object> knowledgeBase = loadKnowledgeBase();
 
-        if (learn) {
+        if (learn) { //set below, training the chatbot
             saveKnowledgeBase(lastAnswer, userInput);
             learn = false;
             return "Thank you!";
@@ -65,12 +65,12 @@ public class ChatBot {
 
         List<String> questionsList = getQuestionsList(knowledgeBase);
 
-        Map<String, String> preprocessedQuestions = preprocessQuestions(questionsList);
+        Map<String, String> preprocessedQuestions = preprocessQuestions(questionsList); //also normalizing
 
         Map<String, Double> similarityScores = new HashMap<>();
         for (Map.Entry<String, String> entry : preprocessedQuestions.entrySet()) {
             double similarity = calculateSimilarity(normalizedInput, entry.getValue());
-            if (similarity >= SIMILARITY_THRESHOLD) {
+            if (similarity >= SIMILARITY_THRESHOLD) {  // <-- Creating a list of all similary thresholds for the questions
                 similarityScores.put(entry.getKey(), similarity);
             }
         }
@@ -78,16 +78,16 @@ public class ChatBot {
         List<Map.Entry<String, Double>> sortedSimilarities = new ArrayList<>(similarityScores.entrySet());
         sortedSimilarities.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        List<String> bestMatches = new ArrayList<>();
+        List<String> bestMatches = new ArrayList<>(); //getting the answers for the best matches
         for (int i = 0; i < Math.min(MAX_RESULTS, sortedSimilarities.size()); i++) {
             bestMatches.add(sortedSimilarities.get(i).getKey());
         }
 
-        if (!bestMatches.isEmpty()) {
+        if (!bestMatches.isEmpty()) { //returning that answer
             return getAnswerForQuestion(bestMatches.get(0), knowledgeBase);
         } else {
-            //learn = true;
-            //return "I don't know the answer. What do you mean to learn from it?";
+            //learn = true; <-- this is where learn would be set
+            //return "I don't know the answer. What do you mean to learn from it?"; <-- old response
             return "I'm not too sure what you said. Please try rephrasing it!";
         }
     }
@@ -101,10 +101,10 @@ public class ChatBot {
     }
 
     private static double calculateSimilarity(String s1, String s2) {
-        Map<CharSequence, Integer> freq1 = getWordFrequencies(s1);
+        Map<CharSequence, Integer> freq1 = getWordFrequencies(s1); //finding frequencies of words in each
         Map<CharSequence, Integer> freq2 = getWordFrequencies(s2);
     
-        CosineSimilarity cosineSimilarity = new CosineSimilarity();
+        CosineSimilarity cosineSimilarity = new CosineSimilarity(); //getting cosine similarity
         return cosineSimilarity.cosineSimilarity(freq1, freq2);
     }
     

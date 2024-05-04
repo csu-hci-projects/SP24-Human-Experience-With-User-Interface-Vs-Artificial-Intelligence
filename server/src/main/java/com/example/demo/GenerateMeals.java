@@ -121,7 +121,7 @@ public class GenerateMeals {
                 done = true;
             }
             
-            calPercent = (((calPercent * allocatedCal) - Caller.calories.get(elgible.get(index))) / allocatedCal);
+            calPercent = (((calPercent * allocatedCal) - Caller.calories.get(elgible.get(index))) / allocatedCal); //current - new food
             proteinPercent = (((proteinPercent * allocatedProtein) - Caller.protein.get(elgible.get(index))) / allocatedProtein);
             carbPercent = (((carbPercent * allocatedCarbs) - Caller.carbs.get(elgible.get(index))) / allocatedCarbs);
             fatPercent = (((fatPercent * allocatedFat) - Caller.fat.get(elgible.get(index))) / allocatedFat);

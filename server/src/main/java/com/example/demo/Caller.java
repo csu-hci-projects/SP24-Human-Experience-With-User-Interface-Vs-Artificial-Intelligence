@@ -27,7 +27,7 @@ public class Caller {
     
     public Caller() {
         try {
-            String url = "jdbc:sqlite:/Users/bbgabel/smarteats-db";
+            String url = "jdbc:sqlite:/Users/bbgabel/smarteats-db"; // Name, Calories, Protien, Carbs, Fat, Serving Size, Meal Type (B, L, D)
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,7 +140,7 @@ public class Caller {
         boolean validF = false;
         double allocatedCal = calc.userCals / 3;
 
-        for (String i : meal) {
+        for (String i : meal) { //Checking macros with database
             int index = names.indexOf(i);
             totalCal += calories.get(index);
             totalP += protein.get(index);
@@ -152,10 +152,10 @@ public class Caller {
         //System.out.println(meal + "\n");
         //System.out.println("________________________________________________________");
 
-        if (((totalCal / allocatedCal) < 1.2) && ((totalCal / allocatedCal) > .8)) {
+        if (((totalCal / allocatedCal) < 1.2) && ((totalCal / allocatedCal) > .8)) { //.4 accuracy
             validCal = true;
         }
-        if ((totalP / (calc.protein / 3)) < 1.5 && (totalP / (calc.protein / 3)) > .5) {
+        if ((totalP / (calc.protein / 3)) < 1.5 && (totalP / (calc.protein / 3)) > .5) { //.10 accuracy
             validP = true;
         }
         if ((totalC / (calc.carbs / 3)) < 1.5 && (totalC / (calc.carbs / 3)) > .5) {
