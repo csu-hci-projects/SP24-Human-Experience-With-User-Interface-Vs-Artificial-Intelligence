@@ -1,0 +1,147 @@
+.Pre-Start {
+    text-align: center;
+}
+
+.Start {
+    background-color: #282c34;
+    min-height: 18vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.bottom {
+    background-color: #282c34;
+    min-height: 8vh;
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    width: 15px;
+    height: 15px;
+}
+
+.dropdown {
+    background-color: #53266e;
+    color: white;
+    padding: 6px;
+    font-size: 16px;
+    width: 180px;
+    text-align: center;
+}
+
+.desc {
+    font-weight: bold;
+    flex: 0;
+}
+
+.textbox {
+    background-color: #53266e;
+    color: white;
+    font-size: 16px;
+}
+
+.green {
+    color: rgb(156, 240, 156);
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.red {
+    color: rgb(255, 0, 0);
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 7px;
+}
+
+.bodytype {
+    cursor: pointer;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+}
+
+.next {
+    background-color: #b37709;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 12px 30px;
+    margin-top: 3%;
+}
+
+.bottom-filler {
+    background-color: #282c34;
+    min-height: 10vh;
+}
+
+.About {
+    background-color: #282c34;
+    min-height: 150vh;
+}
+
+.profile-pic {
+    height: 200px;
+    width: 140px;
+}
+
+.dividor-bottom {
+    height: 3px;
+    width: 100%;
+    margin-top: 160px;
+    margin-bottom: 30px
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mealplan {
+    background-color: #282c34;
+    min-height: 120vh;
+}
+
+.breakfast-top {
+    background-color: #282c34;
+    display: center;
+    padding-top: 40px;
+    padding-left: 20px;
+    color: white;
+    border-bottom: 1px solid gray;
+}
+
+.food-display {
+    background-color: #282c34;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.label {
+    margin: 25px;
+    
+}
+
+.generate {
+    color: rgb(35, 185, 35);
+    cursor: pointer;
+}
+
+.total {
+    color: #b37709;
+    font-weight: bold;
+    margin-top: 30px;
+    border-top: 2px dashed gray;
+    border-bottom: 2px dashed gray;
+}
