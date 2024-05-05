@@ -1,1 +1,5 @@
-#Run the following:
+# Run the following:
+
+### npm i
+
+### npm start
