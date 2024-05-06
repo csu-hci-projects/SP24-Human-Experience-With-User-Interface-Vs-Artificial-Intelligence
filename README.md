@@ -17,6 +17,6 @@ Prototype: https://youtu.be/wgA3atA_Pks
 
 For the second checkpoint, the biggest changes were made to the chatbot version of the prototype. Both Jeremiah and Ashaka focuses on finding more peer-reviewed essays for the paper. While Jeremiah worked on the introduction and abstract, Ashaka handled the methodology and results. Due to busy schedules, we met up more over weekends to work on the project. In the next week before the final submission, we plan on working together to handle the discussion and make the needed changes.
 
-## Code / Experiment Video
+## Final Submission
 
-https://youtu.be/8_V-IkhOPZ8
+Code/Experiment Video: https://youtu.be/8_V-IkhOPZ8
