@@ -20,3 +20,4 @@ For the second checkpoint, the biggest changes were made to the chatbot version 
 ## Final Submission
 
 Code/Experiment Video: https://youtu.be/8_V-IkhOPZ8
+Prototype: https://youtu.be/p-OV762UFcg
