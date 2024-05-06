@@ -19,5 +19,8 @@ For the second checkpoint, the biggest changes were made to the chatbot version 
 
 ## Final Submission
 
+Link to Repository: https://github.com/csu-hci-projects/SP24-Human-Experience-With-User-Interface-Vs-Artificial-Intelligence.git
+
 Code/Experiment Video: https://youtu.be/8_V-IkhOPZ8
+
 Prototype: https://youtu.be/p-OV762UFcg
